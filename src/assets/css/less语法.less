@@ -1,0 +1,63 @@
+// less 语法练习
+
+// string变量
+@backgroud-path: "/src/assets/backgroud/backgroud.jpg";
+.backgroud {
+  background-image: url("@{path}");
+}
+
+/**switch begin*/
+.color-test {
+  .condition(blue);
+}
+.condition(@switch) {
+}
+.condition(red) {
+  background: red;
+}
+.condition(blue) {
+  background: blue;
+}
+/**switch end*/
+
+/**Mixin begin*/
+// 不带参
+.test {
+  .color-test;
+}
+// 带参
+.test(@path) {
+  background-image: url("@{path}");
+}
+.color-test {
+  .test(@backgroud-path);
+}
+// 默认值
+.test(@path:@backgroud-path) {
+  background-image: url("@{path}");
+}
+
+/**Mixin end*/
+
+/**继承 begin*/
+.test {
+  &:extend(.color-test);
+}
+/**继承 end*/
+
+/**变量名做为变量 begin*/
+
+@fnord: "I am Kim";
+@var: "fnord";
+.test {
+  content: @@var;
+}
+/**Mixin end*/
+
+/**父级&选取 begin*/
+.test {
+  &.card-body {
+    background-color: blue;
+  }
+}
+/**父级&选取 end*/
